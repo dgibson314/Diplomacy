@@ -1,0 +1,8 @@
+<gui.ml> : thread
+<gui.{native,byte}> : thread
+
+<engine.ml> : thread
+<engine.{native,byte}> : thread
+
+<toplevel.ml> : thread
+<toplevel.{native,byte}> : thread

@@ -1,0 +1,2 @@
+<prog.ml> : thread
+<prog.{native,byte}> : use_unix, thread
