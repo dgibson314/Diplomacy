@@ -12,13 +12,22 @@ let get_input () =
     Mutex.unlock (!wait_lock);
     !cmd_input_str
 
+let rec gui_get_force (bd : board) (pl : player) =
+    Gui.print_to_cmd "Enter a force:\n";
+    try Game_utils.enter_force bd pl (get_input ()) with
+    | Invalid_Force f ->
+        Gui.print_to_cmd (f ^ " is not a valid force.\n");
+        Gui.print_to_cmd "Try again.\n";
+        gui_get_force bd pl
+
+
 (* Lets user choose a country to play as. Continues asking until a valid
  * country is entered. *)
 let rec gui_get_country () =
     Gui.print_to_cmd "Which country would you like to play?\n";
     try Game_utils.enter_country (get_input ()) with
     | Invalid_Country s ->
-        Gui.print_to_cmd (s ^ " is not a valid force.\n");
+        Gui.print_to_cmd (s ^ " is not a valid country.\n");
         Gui.print_to_cmd "Try again.\n";
         gui_get_country ()
 
@@ -45,6 +54,7 @@ let run_game () =
 
     let user_country = gui_get_country () in
     Init.init_player game_board user_country;
+    let user_player = List.hd game_board.players in
     let ai_cts = List.filter (fun c -> c != user_country) 
             [England; France; Germany; Russia; Turkey; Austria; Italy] in
     Init.init_AIs game_board ai_cts;
@@ -54,6 +64,11 @@ let run_game () =
     (* begin main game loop until winner declared 
     while Board.is_won game_board.players do
         Gui.print_to_cmd "Enter your orders.\n" ^*)
+    while Board.is_won game_board.players = None do
+        let fc = gui_get_force game_board user_player in
+        ()
+    done;
+        
 
 
 
