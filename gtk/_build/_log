@@ -1,0 +1,60 @@
+### Starting build.
+# Target: notebook.ml.depends, tags: { extension:ml, file:notebook.ml, ocaml, ocamldep, quiet }
+/usr/bin/ocamldep.opt -modules notebook.ml > notebook.ml.depends
+# Target: notebook.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:notebook.cmo, file:notebook.ml, implem, ocaml, quiet }
+/usr/bin/ocamlc.opt -c -I /home/dgibson/.opam/system/lib/lablgtk2 -o notebook.cmo notebook.ml
++ /usr/bin/ocamlc.opt -c -I /home/dgibson/.opam/system/lib/lablgtk2 -o notebook.cmo notebook.ml
+File "notebook.ml", line 24, characters 4-52:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 61, characters 4-46:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 65, characters 4-55:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 69, characters 4-59:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 73, characters 4-59:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 77, characters 4-63:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 81, characters 4-59:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 33, characters 12-17:
+Warning 26: unused variable label.
+File "notebook.ml", line 37, characters 12-17:
+Warning 26: unused variable label.
+File "notebook.ml", line 41, characters 8-13:
+Warning 26: unused variable label.
+File "notebook.ml", line 49, characters 12-17:
+Warning 26: unused variable label.
+File "notebook.ml", line 53, characters 12-17:
+Warning 26: unused variable label.
+# Target: notebook.cmx, tags: { compile, extension:cmx, extension:ml, file:notebook.cmx, file:notebook.ml, implem, native, ocaml, quiet }
+/usr/bin/ocamlopt.opt -c -I /home/dgibson/.opam/system/lib/lablgtk2 -o notebook.cmx notebook.ml
++ /usr/bin/ocamlopt.opt -c -I /home/dgibson/.opam/system/lib/lablgtk2 -o notebook.cmx notebook.ml
+File "notebook.ml", line 24, characters 4-52:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 61, characters 4-46:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 65, characters 4-55:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 69, characters 4-59:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 73, characters 4-59:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 77, characters 4-63:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 81, characters 4-59:
+Warning 10: this expression should have type unit.
+File "notebook.ml", line 33, characters 12-17:
+Warning 26: unused variable label.
+File "notebook.ml", line 37, characters 12-17:
+Warning 26: unused variable label.
+File "notebook.ml", line 41, characters 8-13:
+Warning 26: unused variable label.
+File "notebook.ml", line 49, characters 12-17:
+Warning 26: unused variable label.
+File "notebook.ml", line 53, characters 12-17:
+Warning 26: unused variable label.
+# Target: notebook.native, tags: { dont_link_with, extension:native, file:notebook.native, link, native, ocaml, program, quiet }
+/usr/bin/ocamlopt.opt -I /home/dgibson/.opam/system/lib/lablgtk2 /home/dgibson/.opam/system/lib/lablgtk2/lablgtk.cmxa notebook.cmx -o notebook.native
+# Compilation successful.
