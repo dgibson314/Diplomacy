@@ -51,14 +51,9 @@ let run_game () =
 
     print_game_display user_country;
 
-    (* begin main game loop until winner declared *)
+    (* begin main game loop until winner declared 
     while Board.is_won game_board.players do
-        Gui.print_to_cmd "Enter your orders.\n" ^
-        "First, enter the force.\n";
-        try 
-            let user_force = 
-                enter_force game_board user_country (get_input ())
-            in
+        Gui.print_to_cmd "Enter your orders.\n" ^*)
 
 
 

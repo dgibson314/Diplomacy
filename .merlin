@@ -1,0 +1,7 @@
+#structure of my awesome project
+# (shamelessly copying from github)
+
+B _build/**
+PKG lablgtk2
+PKG async
+B +threads
