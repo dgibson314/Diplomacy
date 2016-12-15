@@ -104,7 +104,8 @@ let valid_order bd fc =
     | Support(fc', ord) -> 
         (match ord with
         | Hold -> is_adjacent bd [fc.occupies; fc'.occupies]
-        | Attack(p) -> is_adjacent bd [fc.occupies; p]
+        | Attack([p]) -> is_adjacent bd [fc.occupies; p]
+        | _ -> false)
     | Convoy(fc', (p1, p2)) ->
         is_adjacent bd [fc.occupies; p1] &&
         is_adjacent bd [fc.occupies; p2] &&
