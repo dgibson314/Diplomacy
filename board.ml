@@ -11,7 +11,8 @@ type province = {
     mutable hold_strength : int
 }
 type branch = Army | Fleet
-type state = Succeeds | Fails | Unresolved
+type state = Resolved | Unresolved | Guessing
+type resolution = Fails | Succeeds
 type order = Attack of province list |
              Support of (force * order) | (* order should only be Attack or Hold*)
              Convoy of force * (province * province) |
@@ -159,6 +160,10 @@ struct
     let string_of_branch = function
         | Army -> "Army"
         | Fleet -> "Fleet"
+
+    let abrev_of_branch = function
+        | Army -> "A"
+        | Fleet -> "F"
     
     (* Army PIC [E] *)
     let string_of_force f =
@@ -219,5 +224,11 @@ struct
 
     let provs_of_strings bd lst =
         List.fold_left (fun p s -> (prov_of_string bd s)::p) [] lst
+
+    let branch_of_string str =
+        match str with
+        | "A" | "Army" | "ARMY" | "army"  -> Army
+        | "F" | "Fleet"| "FLEET"| "fleet" -> Fleet
+        | _ -> failwith "Invalid string"
 
 end 

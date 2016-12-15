@@ -54,6 +54,18 @@ let game_info_display = GText.view ~editable:false ~cursor_visible:false
                                    ~packing:game_info_scroll#add ()
 let supply_centers = GBin.frame ~label:"Supply Centers" ~width:1200 
     ~height:230 ~packing:notebook#add ()
+let supply_centers_hbox = GPack.hbox ~width:1200 
+    ~packing:supply_centers#add ()
+let england_centers_scroll = GBin.scrolled_window ~width:170
+    ~packing:supply_centers_hbox#add ()
+let england_centers = GText.view ~editable:false ~cursor_visible:false
+    ~wrap_mode:`WORD ~show:true ~packing:england_centers_scroll#add ()
+let france_centers = GText.view ~editable:false ~cursor_visible:false
+    ~wrap_mode:`WORD ~show:true ~packing:supply_centers_hbox#add ()
+let germany_centers = GText.view ~editable:false ~cursor_visible:false
+    ~wrap_mode:`WORD ~show:true ~packing:supply_centers_hbox#add ()
+let russia_centers = GText.view ~editable:false ~cursor_visible:false
+    ~wrap_mode:`WORD ~show:true ~packing:supply_centers_hbox#add ()
 
 
 

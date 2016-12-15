@@ -16,8 +16,7 @@ let rec gui_get_force (bd : board) (pl : player) =
     Gui.print_to_cmd "Enter a force:\n";
     try Game_utils.enter_force bd pl (get_input ()) with
     | Invalid_Force f ->
-        Gui.print_to_cmd (f ^ " is not a valid force.\n");
-        Gui.print_to_cmd "Try again.\n";
+        Gui.print_to_cmd (f ^ ". Try again.\n");
         gui_get_force bd pl
 
 
