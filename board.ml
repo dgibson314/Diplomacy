@@ -14,7 +14,9 @@ type branch = Army | Fleet
 type state = Resolved | Unresolved | Guessing
 type resolution = Fails | Succeeds
 type order = Attack of province list |
-             Support of (force * order) | (* order should only be Attack or Hold*)
+             (* Support should only be able to support Attack
+              * or Hold *)
+             Support of (force * order) |
              Convoy of force * (province * province) |
              Hold | Void
 and
@@ -32,8 +34,7 @@ type player = {
     mutable supply_centers : province list;
     mutable forces : force list
 }
-(* TODO:
-    * should this include a list of players? *)
+
 type board = {
     provinces : province list;
     mutable forces : force list;
@@ -100,7 +101,10 @@ let valid_order bd fc =
             let clean_path = rmv_dupl path in
             is_adjacent bd clean_path && convoy_helper clean_path
         else false
-    | Support(fc', _) -> failwith "valid_order, Support"
+    | Support(fc', ord) -> 
+        (match ord with
+        | Hold -> is_adjacent bd [fc.occupies; fc'.occupies]
+        | Attack(p) -> is_adjacent bd [fc.occupies; p]
     | Convoy(fc', (p1, p2)) ->
         is_adjacent bd [fc.occupies; p1] &&
         is_adjacent bd [fc.occupies; p2] &&
@@ -125,7 +129,6 @@ let get_forces (bd : board) ct : force list=
         (fun acc (f : force) -> if f.country = ct then f::acc else acc)
         []
         bd.forces
-
 
 let is_won plst =
     try Some (List.find (fun p -> (List.length p.supply_centers) >= 18) plst)
@@ -219,8 +222,8 @@ struct
 
     (**** FROM STRING FUNCTIONALITY ****)
     
-    let prov_of_string bd id =
-        List.find (fun p -> (String.uppercase p.name) = id) bd.provinces
+    let prov_of_string bd str =
+        List.find (fun p -> (String.uppercase p.name) = str) bd.provinces
 
     let provs_of_strings bd lst =
         List.fold_left (fun p s -> (prov_of_string bd s)::p) [] lst
