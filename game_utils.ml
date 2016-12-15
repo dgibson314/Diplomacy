@@ -76,11 +76,14 @@ let enter_order bd (pl : player) str =
     let force_str = (List.hd tokens) ^ " " ^ (List.nth tokens 1) in
     let selected_force = enter_force bd pl force_str in
     match (List.nth tokens 2) with
+    (* Attack *)
     | "->" ->
         let str_move_path = rmv_arrow (drop tokens 3) in
         let move_path = Board.String.provs_of_strings bd str_move_path in
         selected_force.order <- Attack(move_path)
+    (* Hold *)
     | "||" -> selected_force.order <- Hold
+    (* Convoy *)
     | "<>" ->
         let convoy_lst = rmv_arrow (drop tokens 3) in
         let convoyed_force_str = 
@@ -101,5 +104,21 @@ let enter_order bd (pl : player) str =
                 with Not_found -> raise (Invalid_Order "Convoy"))
             | _ -> raise (Invalid_Order "Convoy"))
         else raise (Invalid_Order "Convoy")
-
-            
+    (* Support *)
+    | "==" ->
+        let support_str = drop tokens 3 in
+        let supported_force_str =
+            (List.hd support_str) ^ " " ^ (List.nth support_str 1) in
+        let supported_force = enter_force bd pl supported_force_str in
+        (match (List.nth support_str 2) with
+        | "->" ->
+            let attacked_prov = 
+                Board.String.prov_of_string bd (List.nth support_str 3) in
+            selected_force.order <- Support(supported_force,
+                                     Attack([attacked_prov]))
+        | "||"
+        | "=="
+        | "<>" -> selected_force.order <- Support(supported_force, Hold)
+        | _ -> raise (Invalid_Order "Support"))
+    | _ -> raise (Invalid_Order "Order")
+        
