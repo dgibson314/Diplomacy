@@ -47,6 +47,8 @@ let command_input = GEdit.entry ~editable:true ~show:true
 let button_area = GPack.hbox ~packing:controls#pack ()
 let submit_button = GButton.button ~label:"Submit" 
     ~packing:button_area#pack ()
+let adjudicate_button = GButton.button ~label:"Adjudicate"
+    ~packing:button_area#pack ()
 (*----------------------------------------------------*)
 
 

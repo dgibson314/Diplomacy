@@ -40,17 +40,10 @@ let rec gui_get_order bd pl =
         Gui.print_to_cmd "Woops... Error! Try again...\n";
         gui_get_order bd pl 
 
-(*let print_game_display ct : unit =
-    Gui.print_to_display Gui.game_info_display 
-    ("Country played: " ^ (Board.String.string_of_country ct) ^ "\n" ^
-    "Supply centers to win: " ^ (string_of_int 18) ^ "\n" ^
-    "Variant: Normal\n")*)
-
 
 
 let run_game () =
    
-    Gui.print_to_cmd "hello"; 
     (* Initialization:
         * initialize board
         * get the country user would like to play
@@ -76,9 +69,5 @@ let run_game () =
         gui_get_order game_board user_player;
         Gui.print_to_cmd (Board.String.string_of_orders user_player.forces)
     done;
-        
-
-
-
     ()
 
