@@ -6,3 +6,6 @@
 
 <toplevel.ml> : thread
 <toplevel.{native,byte}> : thread
+
+<window.ml> : thread
+<window.{native,byte}> : thread

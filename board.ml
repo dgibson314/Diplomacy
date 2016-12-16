@@ -201,6 +201,9 @@ struct
         | Void ->
             (string_of_force f) ^ " Void"
 
+    let string_of_orders lst =
+        List.fold_left (fun s f -> (string_of_order f) ^ "\n" ^ s) "" lst
+
     let string_of_forces lst =
         List.fold_left (fun s f -> (string_of_force f) ^ s) "" lst
 

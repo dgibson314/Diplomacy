@@ -1,4 +1,4 @@
-all: board init gui utils engine start toplevel
+all: board init gui utils engine start toplevel window
 
 board: board.ml
 	ocamlbuild -pkg str board.native
@@ -8,6 +8,9 @@ init: init.ml
 
 gui: gui.ml
 	ocamlbuild -pkgs lablgtk2,str,async,unix gui.native
+
+window: window.ml
+	ocamlbuild -pkgs lablgtk2,str,async,unix window.native
 
 start: start.ml
 	ocamlbuild -r -pkgs lablgtk2,str start.native
